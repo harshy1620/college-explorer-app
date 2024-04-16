@@ -1,9 +1,22 @@
-import React from "react";
-import { FaArrowRight, FaDownload, FaCircle, FaCheck } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
+import {
+  FaArrowRight,
+  FaDownload,
+  FaCircle,
+  FaCheck,
+  FaAngleDown,
+} from "react-icons/fa6";
 import { MdCheckBoxOutlineBlank, MdCompareArrows } from "react-icons/md";
-import colleges from "../data";
+import collegesData from "../data"; // Importing your default data from data.js
 
-const DataTable = () => {
+const DataTable = ({ filteredCollege, sortedData }) => {
+  const [dataToRender, setDataToRender] = useState(collegesData);
+
+  useEffect(() => {
+    if (sortedData.length > 0) setDataToRender(sortedData);
+    else if (filteredCollege.length > 0) setDataToRender(filteredCollege);
+  }, [filteredCollege, sortedData]);
+
   return (
     <div
       style={{
@@ -25,29 +38,36 @@ const DataTable = () => {
           </tr>
         </thead>
         <tbody>
-          {colleges.map((college, index) => (
-            <tr key={index}>
+          {dataToRender.map((college, index) => (
+            <tr key={index} className={college.featured ? "featured" : ""}>
               <td>#{college.rank}</td>
 
-              <td className="college-info">
+              <td
+                className="college-info"
+                style={{ paddingTop: college.featured ? "23px" : "10px" }}
+              >
+                {college.featured && (
+                  <div className="featured-div">
+                    <p>Featured</p>
+                  </div>
+                )}
                 {/* upper division */}
                 <div className="upper-div">
                   <div className="image-div">
-                    <img
-                      src={college.logo}
-                      alt={`${college.name} logo`}
-                    />
+                    <img src={college.logo} alt={`${college.name} logo`} />
                   </div>
                   <div className="content-div">
                     <div>
                       <h3>{college.name}</h3>
-                      <p className="address">{college.location} | {college.approvedBy} Approved</p>
+                      <p className="address">
+                        {college.location} | {college.approvedBy} Approved
+                      </p>
                     </div>
                     <div className="college-description">
-                      <p className="course">
-                        {college.course}
+                      <p className="course">{college.course}</p>
+                      <p className="cutoff">
+                        JEE- Advanced Cutoff : {college.cutoff}
                       </p>
-                      <p className="cutoff">JEE- Advanced Cutoff : {college.cutoff}</p>
                     </div>
                   </div>
                 </div>
@@ -86,7 +106,7 @@ const DataTable = () => {
                 </div>
                 <div>
                   <h3>₹ {college.highestPackage}</h3>
-                  <p>Heighest Package</p>
+                  <p>Highest Package</p>
                 </div>
                 <button className="compare-fees-button">
                   <MdCompareArrows />
@@ -99,10 +119,14 @@ const DataTable = () => {
                   <FaCircle />
                   <p className="rating-number">{`${college.userRating}/10`}</p>
                 </div>
-                <p className="no-of-users">Based on {college.basedOnUser} Users</p>
+                <p className="no-of-users">
+                  Based on {college.basedOnUser} Users
+                </p>
+                <p className="review">Reviews</p>
                 <div className="social-container">
                   <FaCheck />
-                  <p className="social-life">Best in social life</p>
+                  <p className="social-life">{college.socialLife}</p>
+                  <FaAngleDown />
                 </div>
               </td>
 
@@ -121,6 +145,7 @@ const DataTable = () => {
                     alt="india-today"
                   />
                   <p>+9 more</p>
+                  <FaAngleDown />
                 </div>
               </td>
             </tr>
