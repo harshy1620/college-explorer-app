@@ -19,6 +19,7 @@
 }
 .header .right{
 display: flex;
+align-items: center;
 gap: 10px;
 }
 .header .right input{
@@ -33,6 +34,18 @@ gap: 10px;
     display: flex;
     align-items: center;
 }
+.header .all-colleges{
+    padding: 10px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+.header .all-colleges button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: rgb(123, 130, 135);
+    cursor: pointer;
+}
 .header select{
     border: none;
     background-color: antiquewhite;
@@ -46,10 +59,11 @@ gap: 10px;
 
 table{
     margin: 50px 0;
-    width: 90%;
+    width: 90vw;
     align-self: center;
     border-collapse: collapse;
     background-color: rgb(255, 255, 255);
+    text-wrap: wrap;
 }
 table td{
     vertical-align: top;

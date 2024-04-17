@@ -9,13 +9,16 @@ const App = () => {
   const [sortedData, setSortedData] = useState([]);
 
   const handleSearch = (searchTerm) => {
-    const filtered = colleges.filter((college) =>
+    setSortedData(null);
+    const filtered = colleges?.filter((college) =>
       college.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    console.log("filtered", filtered);
     setFilteredCollege(filtered);
   };
 
   const sortColleges = (sortBy) => {
+    setFilteredCollege(null);
     switch (sortBy) {
       case "highestfees":
         setSortedData(colleges.slice().sort((a, b) => b.fees - a.fees));
@@ -37,9 +40,17 @@ const App = () => {
     }
   };
 
+  const handleAllCollege = () => {
+    setFilteredCollege(colleges);
+  };
+
   return (
     <div style={{ backgroundColor: "rgb(238, 233, 227)" }}>
-      <Header handleSearch={handleSearch} handleSort={sortColleges} />
+      <Header
+        handleSearch={handleSearch}
+        handleSort={sortColleges}
+        handleAllCollege={handleAllCollege}
+      />
       <DataTable filteredCollege={filteredCollege} sortedData={sortedData} />
       <Footer />
     </div>

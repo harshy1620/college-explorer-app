@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-const Header = ({ handleSearch, handleSort }) => {
+const Header = ({ handleSearch, handleSort, handleAllCollege }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState(""); // State for sorting option
 
@@ -25,6 +25,9 @@ const Header = ({ handleSearch, handleSort }) => {
         <h1>College List</h1>
       </div>
       <div className="right">
+        <div className="all-colleges">
+          <button onClick={handleAllCollege}>All Colleges</button>
+        </div>
         <select value={sortBy} onChange={handleSortChange}>
           <option value="">Sort By</option>
           <option value="cdranking">College Duniya Ranking</option>
