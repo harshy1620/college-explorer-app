@@ -7,8 +7,9 @@ The College Explorer App is a web application built with React that allows users
 
 ## Features
 - View a list of colleges with detailed information.
-- Sort colleges by rating, fees etc.
+- Sort colleges by user rating, college duniya rating, fees etc.
 - Search for colleges by name.
+- Infinite scroll functionality (by using react-infinite-scroll-component linrary).
 
 ## Installation
 - Clone the repository:
